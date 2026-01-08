@@ -1,29 +1,42 @@
 import { useSelector, useDispatch } from "react-redux";
 
+import { counterActions } from "../store/counter.js";
 import classes from "./Counter.module.css";
 
 const Counter = () => {
   const dispatch = useDispatch();
 
   // اذا تم تحديث قيمة state.counter سيتم تحديث المكون هذا بشكل كامل
-  const counter = useSelector((state) => state.counter);
+  const counter = useSelector((state) => state.counter.counter);
   // اذا تم تحديث قيمة state.show سيتم تحديث المكون هذا بشكل كامل
-  const show = useSelector((state) => state.showCounter);
+  const show = useSelector((state) => state.counter.showCounter);
 
   const incrementHandler = () => {
-    dispatch({ type: "increment" });
+    // سابقاً مع redux العادية
+    // dispatch({ type: "increment" });
+
+    dispatch(counterActions.increment());
   };
 
   const increaseHandler = (value) => {
-    dispatch({ type: "increase", amount: 10 });
+    // سابقاً مع redux العادية
+    // dispatch({ type: "increase", amount: 10 });
+
+    dispatch(counterActions.increase(10)); // {type: SOME_UNIQUE_IDENTIFIER. payload: 10}
   };
 
   const decrementHandler = () => {
-    dispatch({ type: "decrement" });
+    // سابقاً مع redux العادية
+    // dispatch({ type: "decrement" });
+
+    dispatch(counterActions.decrement());
   };
 
   const toggleCounterHandler = () => {
-    dispatch({ type: "toggle" });
+    // سابقاً مع redux العادية
+    // dispatch({ type: "toggle" });
+
+    dispatch(counterActions.toggleCounter());
   };
 
   return (
